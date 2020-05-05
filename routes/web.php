@@ -12,14 +12,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/', 'PagesController@index');
 
 Route::get('/about', 'PagesController@about');
 
 Route::get('/service', 'PagesController@service');
 
-Route::resource('posts', 'PostsController');
+Route::resource('/posts', 'PostsController');
+
+Route::get('/user', 'UserController@login_page')->name('login');
+
+Route::post('/user/login', 'UserController@user_login');
+
+Route::get('/user/signup', 'UserController@signup_page');
+
+Route::post('/user/register_user', 'UserController@user_register');
+
+Route::get('/user/dashboard', 'UserController@user_dashboard')->middleware('auth');
+
+;
+
+Route::get('/user/logout', 'UserController@logout');
+
+
+
+
+
