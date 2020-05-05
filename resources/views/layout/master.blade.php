@@ -21,6 +21,16 @@
                         <li><a href="/service">Serivces</a></li>
                         <li><a href="/posts">Posts</a></li>
                     </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        @if (Auth::check())
+                            <li><a href="posts/create">Create Post</a></li>
+                            <li><a class="small" href="/user/logout">Logout</a></li>
+                        @else
+                            <li><a href="/user">Sign In</a></li>
+                            <li><a href="/user/signup">Sign Up</a></li>
+                        @endif
+
+                    </ul>
                 </div>
             </div>
         </nav>

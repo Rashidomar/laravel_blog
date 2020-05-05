@@ -1,32 +1,83 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+Use App\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 class UserController extends Controller
 {
-    public function postSignUp(Request $request)
-        {
-            $username = $request['username'];
-            $email = $request['email'];
-            $password = $request['password'];
+    public function login_page(){
+
+        return view('users/userLogin');
+
+    }
+
+    public function signup_page(){
+
+        return view('users/userSignup');
+    }
+
+    public function user_dashboard(){
+
+        return view('users/userdashboard');
+    }
+
+    public function user_register(Request $request){
+
+            $this->validate($request,[
+            'username' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            ]);
 
             $user = new User();
 
-            $user->username = $username;
-            $user->email = $email;
-            $user->password = $password;
+            $user->username = $request->input('username');
+
+            $user->email = $request->input('email');
+
+            $user->password =  Hash::make($request->input('password'));
+
+            // $user->password = $request->input('password');
 
             $user->save();
 
-            return redirect()->back();
+            Auth::login($user);
 
-        }
-
-    public function postLogIn(Request $request)
-    {
+            return redirect("/user/dashboard")->with('success', 'Great! You have Successfully loggedin');
 
     }
-}
 
-?>
+    public function user_login(Request $request){
+
+        $this->validate($request, [
+            'username' => 'required',
+            'password' => 'required',
+
+        ]);
+
+        // $username = $request->input('username');
+
+        // $password = $request->input('password');
+
+        if (Auth::attempt([
+            'username' => $request->username,
+            'password' => $request->password])
+        ){
+            return redirect('user/dashboard');
+        }
+        return redirect('/user')->with('error', 'username or Password');
+
+    }
+
+    public function logout() {
+
+        Auth::logout();
+
+        return redirect('/posts');
+    }
+}
