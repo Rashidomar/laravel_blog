@@ -78,25 +78,30 @@ class PostController extends Controller
 
         return Redirect::route('post.allPost')->with([
             'status' => 'success',
-            'message' => 'Post Updated Successful'
+            'message' => 'Post Update Successful'
         ]);
 
 
 
     }
 
-    public function deletePost(Request $request)
+    public function delete(Request $request)
     {
-
-        $deletePost = Post::destroy($request->id);
+        $deletePost = Post::destroy($request->postID);
 
         if ($deletePost === false) {
 
-            return Redirect::route('post.allPost')->with('status', 'Post delete failed');
+            return Redirect::route('post.allPost')->with([
+                'status' => 'failed',
+                'message' => 'Post Update Failed'
+            ]);;
 
         }
 
-        return Redirect::route('post.allPost')->with('status', 'Post-Delete!');
+        return Redirect::route('post.allPost')->with([
+            'status' => 'success',
+            'message' => 'Post Delete Successful'
+        ]);
 
     }
 

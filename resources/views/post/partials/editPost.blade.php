@@ -13,7 +13,7 @@
                 <form action="{{route('post.update') }}" method="post">
                     @csrf
                     @method('patch')
-                    <input type="hidden" name="postID" id="postID">
+                    <input type="hidden" name="postID" id="editpostID">
                     <div class="editor mx-auto flex flex-col dark:bg-gray-800  rounded text-gray-800  p-4 shadow-lg" style="width: 700px;">
                         <input name="title" 
                                id="title" 
@@ -39,4 +39,3 @@
             </div>
         </div>
     </div>
-</div> 
