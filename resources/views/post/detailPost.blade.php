@@ -9,7 +9,7 @@
                         	<a href="#"class="px-2 py-1 font-bold bg-red-400 text-white rounded-lg hover:bg-gray-500">web development</a>
                          </div>
                         <div class="mt-2">
-                        	<p class="sm:text-3xl md:text-3xl lg:text-3xl xl:text-4xl font-bold dark:text-gray-200">Django Authentication with oauth using facebook,twitter and google</p>
+                        	<p class="sm:text-3xl md:text-3xl lg:text-3xl xl:text-4xl font-bold dark:text-gray-200">{{$post->title}}</p>
                                 <div class="flex justify-start items-center mt-2">
                                 	<p class="text-sm text-green-500 font-bold bg-gray-100 rounded-full py-2 px-2 hover:text-red-500">3000</p>
                                 	<p class="text-sm text-gray-400 font-bold ml-5">Views</p>
@@ -19,12 +19,12 @@
 	                        		<a href="#" class="flex items-center mt-6 mb-6"><img
 	                                        src="https://avatars.githubusercontent.com/u/71964085?v=4"
 	                                        alt="avatar" class="hidden object-cover w-14 h-14 mx-4 rounded-full sm:block">
-	                                    <h1 class="font-bold dark:text-gray-200  hover:underline">By James Amos</h1>
+	                                    <h1 class="font-bold dark:text-gray-200  hover:underline">{{$post->user->name}}</h1>
 	                                </a>
                         	  </div>
                        </div>
                  <div class="max-w-4xl px-10  mx-auto text-2xl text-gray-200 mt-4 rounded dark:bg-gray-900">
-                        <p class="mt-2 p-8">If you created a web application and wanted it to grow a user base reall quickly,the easiest way is to avoid bothering them with alot forms. No one likes filling up forms! A web form should and must only be used when necessary,in case a user doesnt have account with any of the social networks.That is the moment you want to implement social login on your application.</p>
+                        <p class="mt-2 p-8">{{$post->body}}</p>
 				        </div>
 				    </div>
 		<h2 class="text-2xl mt-4 text-gray-500 font-bold text-center">Related Posts</h2>
