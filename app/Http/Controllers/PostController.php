@@ -13,7 +13,7 @@ class PostController extends Controller
     public function allPost()
     {
 
-        $posts = Post::all();
+        $posts = Post::paginate(1);
         
         return view('post.allPost', ['posts' => $posts]);
     }
@@ -46,15 +46,21 @@ class PostController extends Controller
             'user_id' =>Auth::id()
         ]);
 
-        // if ($post->updateOrFail($request->all()) === false) {
+        if ($post === false) {
 
-        //     return Redirect::route('post.allPost')->with('status', 'Post update failed');
+            return Redirect::route('post.allPost')->with([
+                'status' => 'failed',
+                'message' => 'Failed To Add Post'
+            ]);;
 
-        // }
+        }
 
-        // return Redirect::route('post.allPost')->with('status', 'Post-updated!');
+        return Redirect::route('post.allPost')->with([
+            'status' => 'success',
+            'message' => 'Post added Successful'
+        ]);
 
-        return redirect(RouteServiceProvider::HOME);
+        // return redirect(RouteServiceProvider::HOME);
     }
 
     public function update(Request $request)

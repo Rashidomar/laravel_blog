@@ -28,8 +28,12 @@
 
 
             <div class="flex items-center text-lg no-underline text-white pr-6">
-                <a class="hover:text-gray-200 hover:underline px-4" href="{{ route('login') }}">Sign In </a>
-                <a class="hover:text-gray-200 hover:underline px-4" href="{{ route('register') }}">Sign Up</a>
+                @if(Auth::check())
+                    <a class="hover:text-gray-200 hover:underline px-4" href="{{ route('dashboard') }}">Dashboard</a>
+                @else
+                    <a class="hover:text-gray-200 hover:underline px-4" href="{{ route('login') }}">Sign In </a>
+                    <a class="hover:text-gray-200 hover:underline px-4" href="{{ route('register') }}">Sign Up</a>
+                @endif
                 <a class="" href="#">
                     <i class="fab fa-facebook"></i>
                 </a>
@@ -43,10 +47,7 @@
                     <i class="fab fa-linkedin"></i>
                 </a>
             </div>
-
-
         </div>
-
     </nav>
 
     <!-- Text Header -->
@@ -85,43 +86,35 @@
     </nav>
     <div class="container mx-auto flex flex-wrap py-6">
 <!-- Posts Section -->
-<section class="w-full md:w-2/3 flex flex-col items-center px-3">
-    <!-- {{ var_dump($posts)}} -->
+<section class="w-full md:w-2/3 items-center px-3">
     @foreach($posts as $post)
     <article class="flex flex-col shadow my-4">
         <div class="bg-gray-800 flex flex-col justify-start p-6">
             <a href="#" class="text-white text-sm font-bold uppercase pb-4">Technology</a>
-            <a href="#" class="text-3xl font-bold text-white hover:text-gray-700 pb-4">{{$post->title}}</a>
+            <a href="#" class="text-3xl font-bold text-white hover:text-gray-400 pb-4">{{$post->title}}</a>
             <p href="#" class="text-sm pb-3 text-white">
                 By <a href="#" class="font-semibold  hover:text-gray-800">{{$post->user->name}}</a>, Published on {{$post->created_at}}
             </p>
             <a href="#" class="pb-6 text-white">{{$post->body}}</a>
-            <a href="{{route('post.show', ['postID' => $post->id])}}" class="uppercase text-white hover:text-black">Continue Reading <i class="fas fa-arrow-right"></i></a>
+            <a href="{{route('post.show', ['postID' => $post->id])}}" class="uppercase text-white hover:text-gray-400">Continue Reading <i class="fas fa-arrow-right"></i></a>
         </div>
     </article>
     @endforeach
-    
     <!-- Pagination -->
-    <div class="flex items-center py-8">
-        <a href="#" class="h-10 w-10 bg-gray-800 hover:bg-gray-600 font-semibold text-white text-sm flex items-center justify-center">1</a>
-        <a href="#" class="h-10 w-10 font-semibold text-gray-400 hover:bg-gray-600 hover:text-white text-sm flex items-center justify-center">2</a>
-        <a href="#" class="h-10 w-10 font-semibold text-gray-100 hover:text-gray-400 first-letter:00 text-sm flex items-center justify-center ml-3">Next <i class="fas fa-arrow-right ml-2"></i></a>
-    </div>
-
+        <div class="text-2xl">
+            {{ $posts->links() }}
+        </div>
     </section>
 
     <!-- Sidebar Section -->
     <aside class="w-full md:w-1/3 flex flex-col items-center px-3">
-
-    <div class="w-full bg-white shadow flex flex-col my-4 p-6">
-        <p class="text-xl font-semibold pb-5">About Us</p>
-        <p class="pb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis est eu odio sagittis tristique. Vestibulum ut finibus leo. In hac habitasse platea dictumst.</p>
-        <a href="#" class="w-full bg-gray-700 text-white font-bold text-sm uppercase rounded hover:bg-gray-800 flex items-center justify-center px-2 py-3 mt-4">
-            Get to know us
-        </a>
-    </div>
-
-
+        <div class="w-full bg-white shadow flex flex-col my-4 p-6">
+            <p class="text-xl font-semibold pb-5">About Us</p>
+            <p class="pb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis est eu odio sagittis tristique. Vestibulum ut finibus leo. In hac habitasse platea dictumst.</p>
+            <a href="#" class="w-full bg-gray-700 text-white font-bold text-sm uppercase rounded hover:bg-gray-800 flex items-center justify-center px-2 py-3 mt-4">
+                Get to know us
+            </a>
+        </div>
     </aside>
 
     </div>
