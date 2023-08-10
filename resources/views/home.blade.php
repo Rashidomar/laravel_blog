@@ -14,10 +14,9 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     </head>
-    <body class="antialiased bg-gray-300">
-
+    <body class="antialiased  bg-gray-900">
     <!-- Top Bar Nav -->
-    <nav class="w-full py-4 bg-gray-100 dark:bg-gray-900 shadow">
+    <nav class="w-full py-4  dark:bg-gray-800 shadow">
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between">
 
             <nav>
@@ -29,8 +28,8 @@
 
 
             <div class="flex items-center text-lg no-underline text-white pr-6">
-                <a class="hover:text-gray-200 hover:underline px-4" href="#">Sign In </a>
-                <a class="hover:text-gray-200 hover:underline px-4" href="#">Sign Up</a>
+                <a class="hover:text-gray-200 hover:underline px-4" href="{{ route('login') }}">Sign In </a>
+                <a class="hover:text-gray-200 hover:underline px-4" href="{{ route('register') }}">Sign Up</a>
                 <a class="" href="#">
                     <i class="fab fa-facebook"></i>
                 </a>
@@ -53,17 +52,17 @@
     <!-- Text Header -->
     <header class="w-full container mx-auto">
         <div class="flex flex-col items-center py-12">
-            <a class="font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl" href="#">
+            <a class="font-bold text-white uppercase hover:text-gray-700 text-5xl" href="#">
                 Minimal Blog
             </a>
-            <p class="text-lg text-gray-600">
+            <p class="text-lg text-gray-100">
                 Lorem Ipsum Dolor Sit Amet
             </p>
         </div>
     </header>
 
     <!-- Topic Nav -->
-    <nav class="w-full py-4 border-t border-b bg-gray-100" x-data="{ open: false }">
+    <nav class="w-full py-4 border-t border-b text-white bg-gray-800" x-data="{ open: false }">
         <div class="block sm:hidden">
             <a
                 href="#"
@@ -84,81 +83,29 @@
             </div>
         </div>
     </nav>
-        <!-- <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-        </div> -->
-
     <div class="container mx-auto flex flex-wrap py-6">
-
 <!-- Posts Section -->
 <section class="w-full md:w-2/3 flex flex-col items-center px-3">
-
+    <!-- {{ var_dump($posts)}} -->
+    @foreach($posts as $post)
     <article class="flex flex-col shadow my-4">
-        <!-- Article Image -->
-        <!-- <a href="#" class="hover:opacity-75">
-            <img src="https://source.unsplash.com/collection/1346951/1000x500?sig=1">
-        </a> -->
-        <div class="bg-white flex flex-col justify-start p-6">
-            <a href="#" class="text-gray-700 text-sm font-bold uppercase pb-4">Technology</a>
-            <a href="#" class="text-3xl font-bold hover:text-gray-700 pb-4">Lorem Ipsum Dolor Sit Amet Dolor Sit Amet</a>
-            <p href="#" class="text-sm pb-3">
-                By <a href="#" class="font-semibold hover:text-gray-800">David Grzyb</a>, Published on April 25th, 2020
+        <div class="bg-gray-800 flex flex-col justify-start p-6">
+            <a href="#" class="text-white text-sm font-bold uppercase pb-4">Technology</a>
+            <a href="#" class="text-3xl font-bold text-white hover:text-gray-700 pb-4">{{$post->title}}</a>
+            <p href="#" class="text-sm pb-3 text-white">
+                By <a href="#" class="font-semibold  hover:text-gray-800">{{$post->user->name}}</a>, Published on {{$post->created_at}}
             </p>
-            <a href="#" class="pb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis porta dui. Ut eu iaculis massa. Sed ornare ligula lacus, quis iaculis dui porta volutpat. In sit amet posuere magna..</a>
-            <a href="#" class="uppercase text-gray-800 hover:text-black">Continue Reading <i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="pb-6 text-white">{{$post->body}}</a>
+            <a href="{{route('post.show', ['postID' => $post->id])}}" class="uppercase text-white hover:text-black">Continue Reading <i class="fas fa-arrow-right"></i></a>
         </div>
     </article>
-
-    <article class="flex flex-col shadow my-4">
-        <!-- Article Image -->
-        <!-- <a href="#" class="hover:opacity-75">
-            <img src="https://source.unsplash.com/collection/1346951/1000x500?sig=2">
-        </a> -->
-        <div class="bg-white flex flex-col justify-start p-6">
-            <a href="#" class="text-blue-700 text-sm font-bold uppercase pb-4">Automotive, Finance</a>
-            <a href="#" class="text-3xl font-bold hover:text-gray-700 pb-4">Lorem Ipsum Dolor Sit Amet Dolor Sit Amet</a>
-            <p href="#" class="text-sm pb-3">
-                By <a href="#" class="font-semibold hover:text-gray-800">David Grzyb</a>, Published on January 12th, 2020
-            </p>
-            <a href="#" class="pb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis porta dui. Ut eu iaculis massa. Sed ornare ligula lacus, quis iaculis dui porta volutpat. In sit amet posuere magna..</a>
-            <a href="#" class="uppercase text-gray-800 hover:text-black">Continue Reading <i class="fas fa-arrow-right"></i></a>
-        </div>
-    </article>
-
-    <article class="flex flex-col shadow my-4">
-        <!-- Article Image -->
-        <!-- <a href="#" class="hover:opacity-75">
-            <img src="https://source.unsplash.com/collection/1346951/1000x500?sig=3">
-        </a> -->
-        <div class="bg-white flex flex-col justify-start p-6">
-            <a href="#" class="text-blue-700 text-sm font-bold uppercase pb-4">Sports</a>
-            <a href="#" class="text-3xl font-bold hover:text-gray-700 pb-4">Lorem Ipsum Dolor Sit Amet Dolor Sit Amet</a>
-            <p href="#" class="text-sm pb-3">
-                By <a href="#" class="font-semibold hover:text-gray-800">David Grzyb</a>, Published on October 22nd, 2019
-            </p>
-            <a href="#" class="pb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis porta dui. Ut eu iaculis massa. Sed ornare ligula lacus, quis iaculis dui porta volutpat. In sit amet posuere magna..</a>
-            <a href="#" class="uppercase text-gray-800 hover:text-black">Continue Reading <i class="fas fa-arrow-right"></i></a>
-        </div>
-    </article>
-
+    @endforeach
+    
     <!-- Pagination -->
     <div class="flex items-center py-8">
         <a href="#" class="h-10 w-10 bg-gray-800 hover:bg-gray-600 font-semibold text-white text-sm flex items-center justify-center">1</a>
-        <a href="#" class="h-10 w-10 font-semibold text-gray-800 hover:bg-gray-600 hover:text-white text-sm flex items-center justify-center">2</a>
-        <a href="#" class="h-10 w-10 font-semibold text-gray-800 hover:text-gray-900 text-sm flex items-center justify-center ml-3">Next <i class="fas fa-arrow-right ml-2"></i></a>
+        <a href="#" class="h-10 w-10 font-semibold text-gray-400 hover:bg-gray-600 hover:text-white text-sm flex items-center justify-center">2</a>
+        <a href="#" class="h-10 w-10 font-semibold text-gray-100 hover:text-gray-400 first-letter:00 text-sm flex items-center justify-center ml-3">Next <i class="fas fa-arrow-right ml-2"></i></a>
     </div>
 
     </section>
@@ -179,7 +126,7 @@
 
     </div>
 
-    <footer class="w-full border-t bg-white pb-12">
+    <footer class="w-full border-t bg-gray-800 text-white pb-12">
         <div class="w-full container mx-auto flex flex-col items-center">
             <div class="flex flex-col md:flex-row text-center md:text-left md:justify-between py-6">
                 <a href="#" class="uppercase px-3">About Us</a>
