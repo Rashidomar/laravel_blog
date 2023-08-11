@@ -1,9 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-200 leading-tight">
-            {{ __('All Yours Posts') }}
-        </h2>
+        <div class="w-full container ms-1 flex flex-col sm:flex-row  text-sm font-bold uppercase mt-0 py-2">
+                <p class=" rounded py-2 px-4 mx-2">All Your Posts</p>
+                <a href="{{route('post.create')}}" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">Create Post</a>
+            </div>
     </x-slot>
+
     <div class="py-12">
         @if (session('status') === 'success')
             <x-alert-message :message="session('message')" class="text-green-400 bg-gray-800 border-green-800" butt_hover="focus:ring-green-400 p-1.5 text-green-400 hover:bg-gray-700"/>
@@ -46,10 +48,11 @@
                 </div>
             </div>
         @endforeach 
-        </div>
-        <div class="px-2 text-2xl">
+        <div class="px-5 my-4 text-2xl">
             {{ $posts->links() }}
         </div>
+        </div>
+      
     @include('post.partials.editPost')
     @include('post.partials.deletePost')
 

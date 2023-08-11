@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $post = Post::paginate(1);
+    $post = Post::paginate(3);
     return view('home', ['posts' => $post]);
 });
 

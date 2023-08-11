@@ -13,7 +13,7 @@ class PostController extends Controller
     public function allPost()
     {
 
-        $posts = Post::paginate(1);
+        $posts = Post::paginate(3);
         
         return view('post.allPost', ['posts' => $posts]);
     }
