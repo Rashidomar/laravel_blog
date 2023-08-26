@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Providers\RouteServiceProvider;
+// use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -13,7 +13,8 @@ class PostController extends Controller
     public function allPost()
     {
 
-        $posts = Post::paginate(3);
+        $posts = Post::orderBy('created_at', 'DESC')->paginate(2);
+
         
         return view('post.allPost', ['posts' => $posts]);
     }
@@ -60,12 +61,10 @@ class PostController extends Controller
             'message' => 'Post added Successful'
         ]);
 
-        // return redirect(RouteServiceProvider::HOME);
     }
 
     public function update(Request $request)
     {
-        // dd($request);
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'body' => ['required', 'string'],

@@ -20,7 +20,7 @@
                             <a href="#" class="text-white text-sm font-bold uppercase pb-4">Technology</a>
                             <a href="#" class="text-3xl font-bold text-white hover:text-gray-400 pb-4">{{$post->title}}</a>
                             <p href="#" class="text-sm pb-3 text-white">
-                                By <a href="#" class="font-semibold  hover:text-gray-800">{{$post->user->name}}</a>, Published on {{$post->created_at}}
+                                By <a href="#" class="font-semibold  hover:text-gray-800">{{$post->user->name}}</a>, Published on {{ date('F j, Y', strtotime($post->created_at))}}
                             </p>
                             <a href="#" class="pb-6 text-white">{{$post->body}}</a>
                             <a href="{{route('post.show', ['postID' => $post->id])}}" class="uppercase text-white hover:text-gray-300">Continue Reading <i class="fas fa-arrow-right"></i></a>
@@ -48,9 +48,9 @@
                 </div>
             </div>
         @endforeach 
-        <div class="px-5 my-4 text-2xl">
-            {{ $posts->links() }}
-        </div>
+            <div class="px-5 my-4 text-2xl">
+                {{ $posts->links() }}
+            </div>
         </div>
       
     @include('post.partials.editPost')
