@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comments;
 use App\Models\Post;
 // use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
@@ -23,8 +24,10 @@ class PostController extends Controller
     {
 
         $post = Post::find($postID);
+        $comments = Comments::where('post_id', $postID)->orderBy('created_at', 'DESC')->get();
+        // dd( $comments);
 
-        return view('post.detailPost', ['post'=>$post]);
+        return view('post.detailPost', ['post'=>$post, 'comments'=>$comments]);
 
     }
 
