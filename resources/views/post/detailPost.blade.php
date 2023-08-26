@@ -71,7 +71,7 @@
 				<div class="w-full mt-16 md:mt-0 ">
 				   <form class="relative z-10 h-auto p-8 py-10 overflow-hidden bg-gray-800  rounded px-7">
 					   <h3 class="mb-6 text-center text-lg font-medium  text-gray-100">Write a comment</h3>
-					   <textarea type="text" name="comment" class="w-full px-4 py-3 mb-4  border-gray-700 bg-gray-900 dark:text-gray-300 focus:border-indigo-500 border border-2 border-transparent b rounded-lg focus:ring focus:ring-blue-500" 
+					   <textarea type="text" name="comment" class="w-full px-4 py-3 mb-4  border-gray-700 bg-gray-900 text-gray-300 focus:border-indigo-500 border-transparent b rounded-lg focus:ring focus:ring-blue-500" 
                        placeholder="Write your comment" rows="5" cols="33"></textarea>
 					   <input type="submit" value="Submit comment" name="submit" class=" text-white px-4 py-3 bg-blue-500  rounded-lg">
 				   </form>
