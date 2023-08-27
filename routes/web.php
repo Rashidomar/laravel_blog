@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CommentController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -17,9 +18,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $post = Post::all();
+    $post = Post::paginate(3);
     return view('home', ['posts' => $post]);
 });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -37,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/update_post', [PostController::class, 'update'])->name('post.update');
     Route::delete('/delete_post', [PostController::class, 'delete'])->name('post.delete');
 
+    Route::post("/create_comment", [CommentController::class, 'store'])->name('comment.store');
 
 
 });

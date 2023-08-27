@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comments;
 use App\Models\Post;
-use App\Providers\RouteServiceProvider;
+// use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -13,7 +14,8 @@ class PostController extends Controller
     public function allPost()
     {
 
-        $posts = Post::all();
+        $posts = Post::orderBy('created_at', 'DESC')->paginate(2);
+
         
         return view('post.allPost', ['posts' => $posts]);
     }
@@ -22,8 +24,10 @@ class PostController extends Controller
     {
 
         $post = Post::find($postID);
+        $comments = Comments::where('post_id', $postID)->orderBy('created_at', 'DESC')->get();
+        // dd( $comments);
 
-        return view('post.detailPost', ['post'=>$post]);
+        return view('post.detailPost', ['post'=>$post, 'comments'=>$comments]);
 
     }
 
@@ -46,20 +50,24 @@ class PostController extends Controller
             'user_id' =>Auth::id()
         ]);
 
-        // if ($post->updateOrFail($request->all()) === false) {
+        if ($post === false) {
 
-        //     return Redirect::route('post.allPost')->with('status', 'Post update failed');
+            return Redirect::route('post.allPost')->with([
+                'status' => 'failed',
+                'message' => 'Failed To Add Post'
+            ]);;
 
-        // }
+        }
 
-        // return Redirect::route('post.allPost')->with('status', 'Post-updated!');
+        return Redirect::route('post.allPost')->with([
+            'status' => 'success',
+            'message' => 'Post added Successful'
+        ]);
 
-        return redirect(RouteServiceProvider::HOME);
     }
 
     public function update(Request $request)
     {
-        // dd($request);
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'body' => ['required', 'string'],
